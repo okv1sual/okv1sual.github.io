@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="overflow: hidden;">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/nav.css" />
   <link rel="stylesheet" href="css/hero.css" />
+  <link rel="stylesheet" href="css/what-i-do.css" />
 </head>
 <body>
 
@@ -59,12 +60,16 @@
 
   <main>
     <section class="custom-hero-section" id="hero">
-      <div class="hero-brand-sticker intro-slide-item">
-        <div class="sticker-stack">
-          <div class="sticker-row top-row">MADE BY</div>
-          <div class="sticker-row bottom-row">VISUAL<span class="tm-symbol">™</span></div>
-        </div>
-      </div>
+      <!-- SKY/CLOUD BACKGROUND — fades in once the eye is clicked and the
+           site "pops" open (see body.intro-complete in css/hero.css).
+           Given a slight scroll-parallax drift by js/animations.js. -->
+      <div class="hero-sky-bg" id="heroSkyBg" aria-hidden="true"></div>
+
+      <!-- VIS/2026 BADGE — black ink on transparent background, top-left of
+           the hero, fades in with the rest of the page on unlock. -->
+      <a href="#hero" class="hero-vis-badge" aria-label="okv1sual home">
+        <img class="hero-vis-badge-img" src="assets/images/vis-badge-black.png" alt="VIS 2026" />
+      </a>
 
       <div class="hero-center-content">
 
@@ -145,10 +150,83 @@
         </div>
 
       </div>
+
     </section>
 
-    <section id="what-i-do">
-      <h2>What I Do</h2>
+    <section class="what-i-do-section" id="what-i-do">
+      <div class="wid-container">
+
+        <div class="wid-heading-row scroll-reveal">
+          <span class="wid-tag-sticker">// 02</span>
+          <h2 class="wid-heading">
+            WHAT I <span class="highlight-yellow">DO</span>
+            <svg class="wid-scribble-underline" viewBox="0 0 160 20" fill="none" stroke="#1c1c1e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4,12 C 30,4 50,17 78,9 C 106,1 128,15 156,7" />
+            </svg>
+          </h2>
+        </div>
+
+        <p class="wid-subtext scroll-reveal">a little bit of everything — live, loud, and (mostly) on purpose.</p>
+
+        <div class="wid-grid">
+
+          <article class="wid-card wid-card--1 scroll-reveal">
+            <span class="wid-card-number">01</span>
+            <div class="wid-card-icon">
+              <svg viewBox="0 0 60 60" fill="none" stroke="#1c1c1e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="wid-icon-svg">
+                <path class="wid-draw-path" d="M10,50 L34,26" />
+                <path class="wid-draw-path" d="M32,22 C 38,15 49,17 47,25 C 45,33 34,35 28,28 C 26,26 28,24 32,22 Z" />
+                <path class="wid-draw-path" d="M12,52 C 10,54 10,57 13,57 C 16,57 15,53 12,52 Z" />
+              </svg>
+            </div>
+            <h3 class="wid-card-title">Live Digital Art</h3>
+            <p class="wid-card-desc">Painting, sketching, and character work live on stream — chat picks the prompts, I just try to keep up.</p>
+          </article>
+
+          <article class="wid-card wid-card--2 scroll-reveal">
+            <span class="wid-card-number">02</span>
+            <div class="wid-card-icon">
+              <svg viewBox="0 0 60 60" fill="none" stroke="#1c1c1e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="wid-icon-svg">
+                <path class="wid-draw-path" d="M8,22 L52,22 L47,9 L13,10 Z" />
+                <path class="wid-draw-path" d="M17,10 L21,22" />
+                <path class="wid-draw-path" d="M28,9 L32,22" />
+                <path class="wid-draw-path" d="M39,10 L43,22" />
+                <path class="wid-draw-path" d="M9,24 L51,24 L51,49 C51,50.6 49.6,52 48,52 L12,52 C10.4,52 9,50.6 9,49 Z" />
+                <path class="wid-draw-path" d="M23,33 L39,40 L23,47 Z" />
+              </svg>
+            </div>
+            <h3 class="wid-card-title">Stream Editing &amp; VFX</h3>
+            <p class="wid-card-desc">Cutting highlights, syncing motion graphics, and turning raw VODs into something worth rewatching.</p>
+          </article>
+
+          <article class="wid-card wid-card--3 scroll-reveal">
+            <span class="wid-card-number">03</span>
+            <div class="wid-card-icon">
+              <svg viewBox="0 0 60 60" fill="none" stroke="#1c1c1e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="wid-icon-svg">
+                <path class="wid-draw-path" d="M19,7 C15,7 12,9.5 12,13 L12,45 C12,48.5 15,51 19,51 L23,51 L22,58 L34,51 L41,51 C45,51 48,48.5 48,45 L48,13 C48,9.5 45,7 41,7 Z" />
+                <path class="wid-draw-path" d="M25,23 L25,35 L35,29 Z" />
+              </svg>
+            </div>
+            <h3 class="wid-card-title">Short-Form Clips</h3>
+            <p class="wid-card-desc">Bite-sized moments chopped up for TikTok, Shorts, and wherever else the algorithm feels like sending them.</p>
+          </article>
+
+          <article class="wid-card wid-card--4 scroll-reveal">
+            <span class="wid-card-number">04</span>
+            <div class="wid-card-icon">
+              <svg viewBox="0 0 60 60" fill="none" stroke="#1c1c1e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="wid-icon-svg">
+                <path class="wid-draw-path" d="M12,15 C12,11 15,9 19,9 L44,9 C48,9 51,12 51,16 L52,33 C52,37 49,40 45,40 L27,40 L16,49 L18,40 L18,40 C14,40 11,37 11,33 Z" />
+                <circle class="wid-draw-path" cx="22" cy="24" r="1.6" fill="#1c1c1e" stroke="none" />
+                <circle class="wid-draw-path" cx="31" cy="24" r="1.6" fill="#1c1c1e" stroke="none" />
+                <circle class="wid-draw-path" cx="40" cy="24" r="1.6" fill="#1c1c1e" stroke="none" />
+              </svg>
+            </div>
+            <h3 class="wid-card-title">Community &amp; Chat</h3>
+            <p class="wid-card-desc">Running a Discord that's somehow busier than the stream itself, and hanging out just to hang out.</p>
+          </article>
+
+        </div>
+      </div>
     </section>
 
     <section id="sponsors">
@@ -172,5 +250,6 @@
   <script src="js/main.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/nav.js"></script>
+  <script src="js/what-i-do.js"></script>
 </body>
 </html>

@@ -1,0 +1,196 @@
+/* okv1sual — "what i do" section (doodle cards, hand-drawn icons) */
+
+.what-i-do-section {
+  position: relative;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 100px 24px 110px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.wid-container {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+/* --- HEADING --- */
+.wid-heading-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.wid-tag-sticker {
+  display: inline-flex;
+  background-color: #1c1c1e;
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 9px 3px;
+  border-radius: 4px 7px 5px 8px;
+  transform: rotate(-3deg);
+}
+
+.wid-heading {
+  position: relative;
+  display: inline-block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0;
+}
+
+.wid-scribble-underline {
+  position: absolute;
+  left: 2px;
+  bottom: -14px;
+  width: 68%;
+  max-width: 180px;
+  height: 16px;
+  overflow: visible;
+}
+
+.wid-scribble-underline path {
+  stroke-dasharray: 210;
+  stroke-dashoffset: 210;
+  transition: stroke-dashoffset 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-reveal.is-visible .wid-scribble-underline path {
+  stroke-dashoffset: 0;
+}
+
+.wid-subtext {
+  font-family: 'Caveat', cursive;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1c1c1e;
+  margin: 26px 0 52px;
+  transform: rotate(-1deg);
+  transform-origin: left center;
+}
+
+/* --- GRID --- */
+.wid-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px 28px;
+}
+
+/* --- CARD --- */
+.wid-card {
+  position: relative;
+  background-color: #f7f5f0;
+  border: 2px solid #1c1c1e;
+  border-radius: 16px 22px 18px 24px;
+  padding: 28px 26px 26px;
+  box-shadow: 6px 6px 0 #1c1c1e;
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              box-shadow 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.wid-card--1 { transform: rotate(-1.4deg); }
+.wid-card--2 { transform: rotate(1.1deg); }
+.wid-card--3 { transform: rotate(1.3deg); }
+.wid-card--4 { transform: rotate(-1deg); }
+
+/* Staggered reveal so the cards doodle in one after another rather than
+   all snapping in at once. */
+.wid-subtext.scroll-reveal { transition-delay: 0.08s; }
+.wid-card--1.scroll-reveal { transition-delay: 0.16s; }
+.wid-card--2.scroll-reveal { transition-delay: 0.24s; }
+.wid-card--3.scroll-reveal { transition-delay: 0.32s; }
+.wid-card--4.scroll-reveal { transition-delay: 0.4s; }
+
+.wid-card:hover {
+  transform: rotate(0deg) translateY(-6px) !important;
+  box-shadow: 9px 9px 0 #1c1c1e;
+}
+
+.wid-card-number {
+  position: absolute;
+  top: -14px;
+  right: 18px;
+  background-color: #ffe600;
+  color: #1c1c1e;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 8px 2px;
+  border: 2px solid #1c1c1e;
+  border-radius: 5px 9px 6px 9px;
+  transform: rotate(4deg);
+}
+
+.wid-card-icon {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 14px;
+}
+
+.wid-icon-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.wid-draw-path {
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-reveal.is-visible .wid-draw-path {
+  stroke-dashoffset: 0;
+}
+
+.wid-card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
+  color: #1c1c1e;
+}
+
+.wid-card-desc {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: rgba(28, 28, 30, 0.72);
+  margin: 0;
+}
+
+/* --- SCROLL-REVEAL ENTRANCE (see js/what-i-do.js) --- */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Cards keep their doodle rotation once revealed, rather than snapping
+   flat — the reveal only animates the fade/slide-up, not the tilt. */
+.wid-card.scroll-reveal { transform: translateY(28px) rotate(0deg); }
+.wid-card--1.scroll-reveal.is-visible { transform: translateY(0) rotate(-1.4deg); }
+.wid-card--2.scroll-reveal.is-visible { transform: translateY(0) rotate(1.1deg); }
+.wid-card--3.scroll-reveal.is-visible { transform: translateY(0) rotate(1.3deg); }
+.wid-card--4.scroll-reveal.is-visible { transform: translateY(0) rotate(-1deg); }
+
+@media (max-width: 720px) {
+  .what-i-do-section { padding: 80px 20px 90px; }
+  .wid-grid { grid-template-columns: 1fr; gap: 26px; }
+  .wid-subtext { font-size: 1.4rem; margin-bottom: 40px; }
+}

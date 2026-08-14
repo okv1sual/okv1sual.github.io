@@ -8,6 +8,7 @@
     const typewriterEl = document.getElementById('heroTypewriter');
     const doodlePrompt = document.getElementById('doodlePrompt');
     const heroSocialGroup = document.getElementById('heroSocialGroup');
+    const heroSkyBg = document.getElementById('heroSkyBg');
 
     if (eyeBox && pupil) {
       function setupPath(path) {
@@ -80,12 +81,14 @@
       setTimeout(() => eyeBox.classList.add('is-blinking'), 2000);
       setTimeout(() => eyeBox.classList.remove('is-blinking'), 2300);
 
-      // UNLOCKS UI + TOP BAR AT 2.5S
-      let introComplete = false;
+      // EYE IS "READY" once the draw-in finishes — this only enables the
+      // hover-blink + click interaction and reveals the "click this"
+      // prompt. The rest of the site (nav, sky background, other
+      // sections, socials) stays fully locked/hidden until the user
+      // actually clicks the eye — see the click handler below.
+      let eyeReady = false;
       setTimeout(() => {
-        document.body.classList.add('intro-complete');
-        introComplete = true;
-        startTypewriter();
+        eyeReady = true;
         writeOnDoodlePrompt(doodleState);
       }, 2500);
 
@@ -97,26 +100,44 @@
         setTimeout(() => eyeBox.classList.remove('is-blinking'), duration || 300);
       }
 
-      eyeBox.addEventListener('mouseenter', () => {
-        if (!introComplete) return;
-        triggerBlink();
+      // FIRST CLICK UNLOCKS THE WHOLE SITE: erase "click this", play the
+      // closing half of a blink, then — instead of reopening with the
+      // usual small lash bounce — "pop" the eye open big while the nav,
+      // sky background, and rest of the page all reveal at the same
+      // moment, so it reads as one single "pop reveals everything" beat.
+      // Every click after that just plays the normal playful blink.
+      let siteUnlocked = false;
+      eyeBox.addEventListener('click', () => {
+        if (!eyeReady) return;
+
+        if (siteUnlocked) {
+          triggerBlink();
+          return;
+        }
+
+        siteUnlocked = true;
+
+        eraseDoodlePrompt(doodleState, () => {
+          if (doodlePrompt) doodlePrompt.classList.add('is-hidden');
+        });
+
+        eyeBox.classList.add('is-blinking');
+        setTimeout(() => {
+          eyeBox.classList.remove('is-blinking');
+          eyeBox.classList.add('is-popping');
+
+          document.documentElement.style.overflow = '';
+          document.body.classList.add('intro-complete');
+          startTypewriter();
+          if (heroSocialGroup) heroSocialGroup.classList.add('is-visible');
+
+          setTimeout(() => eyeBox.classList.remove('is-popping'), 700);
+        }, 280);
       });
 
-      // EYE CLICK HANDLER: ERASES "CLICK THIS" & POPS IN SOCIAL ICONS
-      let eyeClicked = false;
-      eyeBox.addEventListener('click', () => {
-        if (!introComplete) return;
+      eyeBox.addEventListener('mouseenter', () => {
+        if (!eyeReady) return;
         triggerBlink();
-
-        if (!eyeClicked) {
-          eyeClicked = true;
-          eraseDoodlePrompt(doodleState, () => {
-            if (doodlePrompt) doodlePrompt.classList.add('is-hidden');
-          });
-          setTimeout(() => {
-            if (heroSocialGroup) heroSocialGroup.classList.add('is-visible');
-          }, 150);
-        }
       });
 
       function startTypewriter() {
@@ -144,6 +165,27 @@
           }
         }
         typeChar();
+      }
+
+      // SKY BACKGROUND PARALLAX — a subtle drift as the page scrolls, so
+      // the clouds feel like they're sitting slightly behind the content
+      // rather than pasted flat onto it. Throttled via requestAnimationFrame
+      // and capped so it never outpaces the buffer built into .hero-sky-bg
+      // (see css/hero.css) and reveals a gap at the top/bottom edge.
+      if (heroSkyBg) {
+        let parallaxTicking = false;
+        function updateParallax() {
+          const offset = Math.min(window.scrollY * 0.15, 80);
+          heroSkyBg.style.transform = `translate3d(0, ${offset}px, 0)`;
+          parallaxTicking = false;
+        }
+        window.addEventListener('scroll', () => {
+          if (!parallaxTicking) {
+            window.requestAnimationFrame(updateParallax);
+            parallaxTicking = true;
+          }
+        }, { passive: true });
+        updateParallax();
       }
     }
   }

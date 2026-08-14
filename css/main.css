@@ -19,3 +19,29 @@ body {
   color: var(--color-text);
   font-family: "Space Grotesk", "JetBrains Mono", monospace, sans-serif;
 }
+
+/* SHARED "MARKER HIGHLIGHT" TEXT TREATMENT — a scribbled yellow underline
+   used behind key words across sections. Visible by default; the hero's
+   typewriter headline overrides this to reveal on hover instead
+   (see css/hero.css). */
+.highlight-yellow {
+  position: relative;
+  display: inline-block;
+  color: #1c1c1e;
+  z-index: 1;
+  padding: 0 4px;
+}
+.highlight-yellow::before {
+  content: '';
+  position: absolute;
+  top: 8%;
+  left: -2px;
+  right: -2px;
+  bottom: 4%;
+  background-color: #ffe600;
+  z-index: -1;
+  border-radius: 4px 8px 5px 7px;
+  transform: rotate(-1deg) skew(-2deg) scaleX(1);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+}

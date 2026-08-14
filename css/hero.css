@@ -5,21 +5,85 @@
   background-color: #f7f5f0 !important; display: flex !important; flex-direction: column !important;
   justify-content: center !important; align-items: center !important; padding: 100px 24px 60px !important;
   box-sizing: border-box !important;
+  overflow: hidden !important;
 }
-.hero-brand-sticker { position: absolute !important; top: 28px !important; left: 28px !important; z-index: 10 !important; cursor: pointer !important; }
-.sticker-stack {
-  display: flex !important; flex-direction: column !important; align-items: flex-start !important;
-  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif !important;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.08)) !important; transform-origin: center left !important;
-  transition: transform 0.35s cubic-bezier(0.175,0.885,0.32,1.275), filter 0.35s ease !important;
-}
-.hero-brand-sticker:hover .sticker-stack { transform: scale(1.08) rotate(-2deg) translateY(-2px) !important; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15)) !important; }
-.sticker-row { background-color: #fff !important; color: #0d0d0d !important; text-transform: uppercase !important; line-height: 1 !important; display: inline-flex !important; align-items: center !important; }
-.top-row { font-size: 0.72rem !important; font-weight: 600 !important; padding: 2px 5px 1px !important; letter-spacing: -0.01em !important; }
-.bottom-row { font-size: 1.15rem !important; font-weight: 900 !important; padding: 3px 6px !important; letter-spacing: -0.03em !important; margin-top: -1px !important; }
-.tm-symbol { font-size: 0.55rem !important; font-weight: 800 !important; vertical-align: super !important; margin-left: 2px !important; margin-top: -4px !important; }
 
-.hero-center-content { display: flex !important; flex-direction: column !important; align-items: center !important; text-align: center !important; gap: 16px !important; }
+/* SKY/CLOUD BACKGROUND — hidden (plain off-white behind it) during the
+   locked intro, fades in the moment the site unlocks so the reveal feels
+   like part of the same "pop" as the eye opening.
+   top/bottom extend past the section's own edges so js/animations.js can
+   translateY it a little on scroll (parallax) without ever exposing a
+   gap at the top or bottom edge. */
+.hero-sky-bg {
+  position: absolute !important;
+  top: -80px !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: -80px !important;
+  z-index: 0 !important;
+  background-image: url('../assets/images/hero-sky-bg.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  opacity: 0 !important;
+  will-change: transform !important;
+  transition: opacity 1.2s ease !important;
+}
+body.intro-complete .hero-sky-bg { opacity: 1 !important; }
+
+.hero-center-content {
+  position: relative !important;
+  z-index: 1 !important;
+  display: flex !important; flex-direction: column !important; align-items: center !important; text-align: center !important; gap: 16px !important;
+}
+
+/* --- LOCKED INTRO STATE ---
+   Until the eye is clicked, the page is pinned to a single screen with
+   nothing visible but the eye + "click this" prompt: the nav, the rest
+   of the page, and the footer are all hidden and scrolling is disabled.
+   See html's inline overflow:hidden (removed by js/animations.js on
+   unlock) and body.intro-complete below. */
+body:not(.intro-complete) {
+  overflow: hidden !important;
+  height: 100vh !important;
+}
+body:not(.intro-complete) main > section:not(#hero),
+body:not(.intro-complete) footer {
+  display: none !important;
+}
+
+/* VIS/2026 BADGE — hand-vectorised mark, top-left corner of the hero.
+   Stays hidden with the rest of the page during the locked intro, then
+   fades/pops in alongside the sky background and nav on unlock. */
+.hero-vis-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 5;
+  display: block;
+  line-height: 0;
+  opacity: 0;
+  transform: translateY(-8px) rotate(-4deg) scale(0.85);
+  transition: opacity 0.6s ease 0.15s, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.15s;
+}
+body.intro-complete .hero-vis-badge {
+  opacity: 1;
+  transform: translateY(0) rotate(-4deg) scale(1);
+}
+.hero-vis-badge-img {
+  width: 92px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(2px 3px 0 rgba(28, 28, 30, 0.12));
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.35s ease;
+}
+.hero-vis-badge:hover .hero-vis-badge-img,
+.hero-vis-badge:focus-visible .hero-vis-badge-img {
+  transform: rotate(4deg) scale(1.08);
+  filter: drop-shadow(3px 5px 0 rgba(28, 28, 30, 0.18));
+}
+.hero-vis-badge:active .hero-vis-badge-img {
+  transform: rotate(4deg) scale(0.96);
+}
 
 /* EYE CONTAINER WRAPPER FOR PERFECT OVERLAY POSITIONING */
 .eye-wrapper-relative {
@@ -85,14 +149,7 @@ body.intro-complete .doodle-click-prompt.is-hidden,
 .cursor-bar { font-weight: 300 !important; animation: blinkCursor 0.8s infinite !important; margin-left: 2px !important; }
 @keyframes blinkCursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-.highlight-yellow {
-  position: relative !important; display: inline-block !important; color: #1c1c1e !important; z-index: 1 !important; padding: 0 4px !important;
-}
-.highlight-yellow::before {
-  content: '' !important; position: absolute !important; top: 8% !important; left: -2px !important; right: -2px !important; bottom: 4% !important;
-  background-color: #ffe600 !important; z-index: -1 !important; border-radius: 4px 8px 5px 7px !important;
-  transform: rotate(-1deg) skew(-2deg) scaleX(0) !important; transform-origin: left center !important; transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
-}
+.typewriter-headline .highlight-yellow::before { transform: rotate(-1deg) skew(-2deg) scaleX(0) !important; }
 .typewriter-headline:hover .highlight-yellow::before { transform: rotate(-1deg) skew(-2deg) scaleX(1) !important; }
 
 /* FREE-FLOATING SOCIAL ICONS CONTAINER */
@@ -196,9 +253,23 @@ body.intro-complete .intro-slide-item { opacity: 1 !important; transform: transl
 .is-blinking .eye-closed-lid { opacity: 1 !important; }
 .is-blinking .eye-lashes-group { opacity: 0 !important; transform: scale(0.3) translateY(15px) !important; }
 
+/* THE "POP" — plays once, right as the eye reopens from the final
+   unlock-triggering blink, instead of the usual small lash bounce.
+   Fires at the same moment body.intro-complete reveals the nav, the
+   rest of the page, and the sky background, so it reads as one single
+   "pop reveals everything" beat. */
+@keyframes eyePopReveal {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.45); }
+  65% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+.interactive-eye-container.is-popping {
+  animation: eyePopReveal 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
 @media (max-width: 600px) {
-  .hero-brand-sticker { top: 16px !important; left: 16px !important; }
-  .top-row { font-size: 0.62rem !important; padding: 1px 4px !important; }
-  .bottom-row { font-size: 0.98rem !important; padding: 2px 5px !important; }
+  .hero-vis-badge { top: 14px !important; left: 14px !important; }
+  .hero-vis-badge-img { width: 72px !important; }
   .doodle-click-prompt { left: 10px; top: -22px; font-size: 1.5rem; }
 }
