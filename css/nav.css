@@ -69,7 +69,8 @@ body.intro-complete .boxer-nav-wrapper {
   height: 100% !important;
   color: currentColor !important;
   text-decoration: none !important;
-  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), color 0.25s ease !important;
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), color 0.25s ease,
+              width 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
 .nav-left:hover {
@@ -97,24 +98,35 @@ body.intro-complete .boxer-nav-wrapper {
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-/* --- DESKTOP: centered "BE CREATIVE" pill at top, slides + condenses
-   into a corner pill with a back-to-top arrow once scrolled. --- */
+/* --- DESKTOP: right-anchored "BE CREATIVE" pill at top; condenses
+   in place once scrolled (right edge — the hamburger side — never
+   moves, since `right` stays constant and only `width` shrinks, so
+   it's the left edge that moves inward), swapping the text for a
+   back-to-top arrow. --- */
 @media (min-width: 769px) {
   .boxer-nav-wrapper {
-    right: 50% !important;
+    right: 24px !important;
     left: auto !important;
-    transform: translateX(50%) !important;
+    transform: none !important;
     width: 184px !important;
     max-width: 184px !important;
     padding: 0 16px !important;
   }
 
   .boxer-nav-wrapper.is-scrolled:not(.is-open) {
-    right: 24px !important;
-    transform: translateX(0) !important;
     width: 92px !important;
     max-width: 92px !important;
     padding: 0 12px !important;
+  }
+
+  /* nav-left's own box must shrink to just the arrow's footprint here —
+     otherwise the (invisible but still laid-out) nowrap "BE CREATIVE"
+     text keeps nav-left pinned to its full ~93px width, which pushes
+     the divider and hamburger outside the condensed 92px-wide bar
+     entirely (silently clipped by the wrapper's overflow: hidden). */
+  .boxer-nav-wrapper.is-scrolled:not(.is-open) .nav-left {
+    width: 14px;
+    min-width: 0;
   }
 
   .boxer-nav-wrapper.is-scrolled:not(.is-open) .nav-left-text {
@@ -126,15 +138,6 @@ body.intro-complete .boxer-nav-wrapper {
   .boxer-nav-wrapper.is-scrolled:not(.is-open) .nav-left-arrow {
     opacity: 1;
     transform: scale(1) rotate(0deg);
-  }
-
-  /* The drawer always opens anchored to the corner, regardless of
-     whether the bar was centered (top of page) or condensed (scrolled)
-     when the hamburger was clicked. */
-  .boxer-nav-wrapper.is-open {
-    right: 24px !important;
-    left: auto !important;
-    transform: translateX(0) !important;
   }
 }
 
@@ -193,6 +196,35 @@ body.intro-complete .boxer-nav-wrapper {
        freshly-displayed element always plays its animation from 0%. */
     animation: arrowSpinPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
+
+  /* Open drawer: always show "BE CREATIVE" text (never the arrow) in
+     the top-left, matching desktop's open state, regardless of scroll
+     position when the hamburger was clicked. */
+  .boxer-nav-wrapper.is-open .nav-left {
+    display: inline-flex !important;
+  }
+
+  .boxer-nav-wrapper.is-open .nav-left-text {
+    display: inline-block !important;
+    opacity: 1 !important;
+    transform: scale(1) !important;
+  }
+
+  .boxer-nav-wrapper.is-open .nav-left-arrow {
+    opacity: 0 !important;
+  }
+}
+
+/* Explicit, JS-triggered entrance/exit for the desktop arrow (mobile's
+   entrance already replays automatically via the display:none toggle
+   above, but desktop's arrow is only ever opacity-toggled — never
+   un-rendered — so it needs an explicit class to restart the keyframe
+   in either direction). See js/nav.js. */
+.nav-left-arrow.js-spin-in {
+  animation: arrowSpinPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.nav-left-arrow.js-spin-out {
+  animation: arrowSpinPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) reverse;
 }
 
 @keyframes arrowSpinPop {

@@ -22,14 +22,37 @@
       toggleBtn.setAttribute('aria-expanded', 'false');
     }
 
+    // Desktop's arrow is only ever cross-faded via opacity (never
+    // un-rendered like mobile's), so it needs an explicit class to
+    // replay the spin-pop keyframe — forward when condensing, and in
+    // reverse when un-condensing back to the "BE CREATIVE" text.
+    const desktopMql = window.matchMedia('(min-width: 769px)');
+    let wasCondensed = null; // null = not yet initialized, skips the first call
+
+    function animateDesktopArrow(isCondensed) {
+      if (!desktopMql.matches) return;
+      const arrowEl = navWrapper.querySelector('.nav-left-arrow');
+      if (!arrowEl) return;
+      arrowEl.classList.remove('js-spin-in', 'js-spin-out');
+      void arrowEl.offsetWidth; // force reflow so the animation restarts
+      const activeClass = isCondensed ? 'js-spin-in' : 'js-spin-out';
+      arrowEl.classList.add(activeClass);
+      arrowEl.addEventListener('animationend', () => {
+        arrowEl.classList.remove(activeClass);
+      }, { once: true });
+    }
+
     function handleScroll() {
       const scrollPos = window.scrollY || document.documentElement.scrollTop;
+      const shouldCondense = scrollPos > 40;
 
-      if (scrollPos > 40) {
-        navWrapper.classList.add('is-scrolled');
-      } else {
-        navWrapper.classList.remove('is-scrolled');
+      if (shouldCondense !== wasCondensed) {
+        if (wasCondensed !== null) {
+          animateDesktopArrow(shouldCondense);
+        }
+        wasCondensed = shouldCondense;
       }
+      navWrapper.classList.toggle('is-scrolled', shouldCondense);
 
       if (scrollPos > 250 && navWrapper.classList.contains('is-open')) {
         closeMenu();
