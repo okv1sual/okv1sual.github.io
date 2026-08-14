@@ -110,6 +110,10 @@
     // overlays/chatbots call it directly from the browser).
     const streamStatusLink = document.getElementById('streamStatusBtn');
     const statusTextEl = document.getElementById('statusText');
+    // Hero's own Twitch icon (in the reveal-on-eye-click social row) gets
+    // a small pulsing badge kept in sync with this same status check, so
+    // there's a single source of truth for "am I live right now".
+    const heroTwitchBtn = document.getElementById('heroTwitchBtn');
 
     function getTwitchChannelFromLink(link) {
       try {
@@ -134,10 +138,12 @@
           const isLive = !/offline/i.test(text.trim());
           streamStatusLink.classList.toggle('is-live', isLive);
           statusTextEl.textContent = isLive ? 'LIVE' : 'STREAM OFFLINE';
+          if (heroTwitchBtn) heroTwitchBtn.classList.toggle('is-live', isLive);
         })
         .catch(() => {
           streamStatusLink.classList.remove('is-live');
           statusTextEl.textContent = 'STREAM OFFLINE';
+          if (heroTwitchBtn) heroTwitchBtn.classList.remove('is-live');
         });
     }
 

@@ -157,6 +157,28 @@ body.intro-complete .doodle-click-prompt.is-hidden,
   stroke-dashoffset: 0;
 }
 
+/* LIVE STATUS BADGE ON THE HERO TWITCH ICON (kept in sync with the nav
+   drawer's status by js/nav.js, which owns the actual Twitch API check) */
+.hero-live-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #ff0000;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.hero-social-btn.is-live .hero-live-badge {
+  opacity: 1;
+  transform: scale(1);
+  animation: statusDotBreathe 1.6s ease-in-out infinite;
+}
+
 /* EYE ANIMATIONS & INTRO */
 .intro-slide-item { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
 body.intro-complete .intro-slide-item { opacity: 1 !important; transform: translateY(0) !important; }
@@ -165,9 +187,14 @@ body.intro-complete .intro-slide-item { opacity: 1 !important; transform: transl
 .eye-open-lids { opacity: 1; } .eye-closed-lid { opacity: 0; }
 .eye-lashes-group { transform-origin: 150px 110px; opacity: 0; transform: scale(0.4); transition: transform 0.45s cubic-bezier(0.175,0.885,0.32,1.4), opacity 0.3s ease; }
 .eye-lashes-group.is-popped { opacity: 1; transform: scale(1); }
-.is-blinking #heroPupil, .is-blinking .eye-open-lids, .interactive-eye-container.can-hover:hover #heroPupil, .interactive-eye-container.can-hover:hover .eye-open-lids { opacity: 0 !important; }
-.is-blinking .eye-closed-lid, .interactive-eye-container.can-hover:hover .eye-closed-lid { opacity: 1 !important; }
-.is-blinking .eye-lashes-group, .interactive-eye-container.can-hover:hover .eye-lashes-group { opacity: 0 !important; transform: scale(0.3) translateY(15px) !important; }
+/* Blinking is always a transient JS-triggered animation (mouseenter on
+   desktop, click/tap on mobile) rather than a CSS :hover state — a
+   persistent :hover-driven closed state gets "stuck" on touch devices,
+   since mobile browsers apply :hover after a tap and only clear it on
+   a tap elsewhere, leaving the eye looking like a single closed line. */
+.is-blinking #heroPupil, .is-blinking .eye-open-lids { opacity: 0 !important; }
+.is-blinking .eye-closed-lid { opacity: 1 !important; }
+.is-blinking .eye-lashes-group { opacity: 0 !important; transform: scale(0.3) translateY(15px) !important; }
 
 @media (max-width: 600px) {
   .hero-brand-sticker { top: 16px !important; left: 16px !important; }

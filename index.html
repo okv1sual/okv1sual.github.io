@@ -65,8 +65,8 @@
         <!-- EYE CONTAINER WITH ANGLED "CLICK THIS" OVERLAY -->
         <div class="eye-wrapper-relative">
 
-          <!-- DOODLE "CLICK THIS" PROMPT -->
-          <div class="doodle-click-prompt intro-slide-item" id="doodlePrompt">
+          <!-- DOODLE "CLICK THIS" PROMPT (typed on + erased via JS, see animations.js) -->
+          <div class="doodle-click-prompt" id="doodlePrompt">
             <span class="doodle-text">click this</span>
             <svg class="doodle-arrow-svg" viewBox="0 0 30 30" fill="none" stroke="#1c1c1e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M 6,4 Q 18,8 20,20" />
@@ -104,11 +104,12 @@
         <div class="hero-social-pills" id="heroSocialGroup">
 
           <!-- TWITCH -->
-          <a href="https://www.twitch.tv/okv1sual" target="_blank" rel="noopener noreferrer" class="hero-social-btn" aria-label="Twitch">
+          <a href="https://www.twitch.tv/okv1sual" target="_blank" rel="noopener noreferrer" class="hero-social-btn" id="heroTwitchBtn" aria-label="Twitch">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143h-1.715zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
             <svg class="pencil-circle-icon-svg" viewBox="0 0 60 60" fill="none" stroke="#1c1c1e" stroke-width="2.5" stroke-linecap="round">
               <path d="M 8,30 C 5,12 25,5 48,15 C 60,25 55,48 32,52 C 12,54 4,40 12,22 C 18,10 42,6 54,18" />
             </svg>
+            <span class="hero-live-badge" id="heroTwitchLiveBadge" aria-hidden="true"></span>
           </a>
 
           <!-- TIKTOK -->
