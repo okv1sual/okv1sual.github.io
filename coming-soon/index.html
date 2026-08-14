@@ -10,9 +10,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=JetBrains+Mono:wght@500;700&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../css/main.css" />
-  <link rel="stylesheet" href="../css/hero.css" />
-  <link rel="stylesheet" href="../css/coming-soon.css" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/hero.css" />
+  <link rel="stylesheet" href="/css/coming-soon.css" />
 </head>
 <body>
 
@@ -25,7 +25,7 @@
       <!-- VIS/2026 BADGE — black ink on transparent background, top-left of
            the hero, fades in with the rest of the page on unlock. -->
       <span class="hero-vis-badge" aria-hidden="true">
-        <img class="hero-vis-badge-img" src="../assets/images/vis-badge-black.png" alt="" />
+        <img class="hero-vis-badge-img" src="/assets/images/vis-badge-black.png" alt="" />
       </span>
 
       <div class="hero-center-content">
@@ -111,7 +111,44 @@
     </section>
   </main>
 
-  <script src="../js/coming-soon.js"></script>
-  <script src="../js/animations.js"></script>
+  <!-- Inline so the coming-soon typewriter cannot 404 or lose a race to a
+       cached copy of animations.js. coming-soon.js is kept as the same
+       isolated source for later deletion. -->
+  <script>
+    window.okv1sualHeroConfig = {
+      deferSocials: true,
+      startTypewriter: function (typewriterEl, onComplete) {
+        if (!typewriterEl) {
+          if (onComplete) onComplete();
+          return;
+        }
+        var textPrefix = "coming ";
+        var highlightWord = "soon";
+        var charIndex = 0;
+        var totalLen = textPrefix.length + highlightWord.length;
+
+        function typeChar() {
+          if (charIndex < totalLen) {
+            charIndex++;
+            var currentText = (textPrefix + highlightWord).substring(0, charIndex);
+
+            if (currentText.length > textPrefix.length) {
+              var typedHighlight = currentText.substring(textPrefix.length);
+              typewriterEl.innerHTML = textPrefix + '<span class="highlight-yellow">' + typedHighlight + '</span><span class="cursor-bar">|</span>';
+            } else {
+              typewriterEl.innerHTML = currentText + '<span class="cursor-bar">|</span>';
+            }
+
+            setTimeout(typeChar, 85);
+          } else {
+            typewriterEl.innerHTML = 'coming <span class="highlight-yellow">soon</span>';
+            if (onComplete) onComplete();
+          }
+        }
+        typeChar();
+      }
+    };
+  </script>
+  <script src="/js/animations.js?v=cs1"></script>
 </body>
 </html>
