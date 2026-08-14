@@ -45,6 +45,10 @@
       }
     }, { passive: true });
 
+    // Set the correct initial state right away in case the page loads
+    // already scrolled down (e.g. a direct link to a section anchor).
+    handleScroll();
+
     // --- Letter animation breakdown ---
     document.querySelectorAll('.stagger-link').forEach(link => {
       const text = link.textContent.trim();
