@@ -1,0 +1,177 @@
+/* okv1sual — hero section (hand-drawn eye, typewriter, socials) */
+
+.custom-hero-section {
+  position: relative !important; width: 100% !important; min-height: 85vh !important;
+  background-color: #f7f5f0 !important; display: flex !important; flex-direction: column !important;
+  justify-content: center !important; align-items: center !important; padding: 100px 24px 60px !important;
+  box-sizing: border-box !important;
+}
+.hero-brand-sticker { position: absolute !important; top: 28px !important; left: 28px !important; z-index: 10 !important; cursor: pointer !important; }
+.sticker-stack {
+  display: flex !important; flex-direction: column !important; align-items: flex-start !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif !important;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.08)) !important; transform-origin: center left !important;
+  transition: transform 0.35s cubic-bezier(0.175,0.885,0.32,1.275), filter 0.35s ease !important;
+}
+.hero-brand-sticker:hover .sticker-stack { transform: scale(1.08) rotate(-2deg) translateY(-2px) !important; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15)) !important; }
+.sticker-row { background-color: #fff !important; color: #0d0d0d !important; text-transform: uppercase !important; line-height: 1 !important; display: inline-flex !important; align-items: center !important; }
+.top-row { font-size: 0.72rem !important; font-weight: 600 !important; padding: 2px 5px 1px !important; letter-spacing: -0.01em !important; }
+.bottom-row { font-size: 1.15rem !important; font-weight: 900 !important; padding: 3px 6px !important; letter-spacing: -0.03em !important; margin-top: -1px !important; }
+.tm-symbol { font-size: 0.55rem !important; font-weight: 800 !important; vertical-align: super !important; margin-left: 2px !important; margin-top: -4px !important; }
+
+.hero-center-content { display: flex !important; flex-direction: column !important; align-items: center !important; text-align: center !important; gap: 16px !important; }
+
+/* EYE CONTAINER WRAPPER FOR PERFECT OVERLAY POSITIONING */
+.eye-wrapper-relative {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ANGLED "CLICK THIS" PROMPT OVERLAY */
+.doodle-click-prompt {
+  position: absolute;
+  top: -18px;
+  left: -10px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-family: 'Caveat', cursive !important;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1c1c1e;
+  transform: rotate(-14deg);
+  z-index: 10;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* FORCES DISAPPEARANCE ON EYE CLICK EVEN WHEN INTRO IS COMPLETE */
+body.intro-complete .doodle-click-prompt.is-hidden,
+.doodle-click-prompt.is-hidden {
+  opacity: 0 !important;
+  transform: rotate(-20deg) scale(0.7) !important;
+  pointer-events: none !important;
+}
+
+.doodle-arrow-svg {
+  width: 28px;
+  height: 28px;
+  transform: rotate(8deg) translateY(6px);
+}
+
+/* EYE CONTAINER */
+.interactive-eye-container { width: min(320px, 75vw); height: auto; cursor: pointer; display: flex; justify-content: center; align-items: center; padding: 10px; }
+.hand-drawn-eye { width: 100%; height: 100%; overflow: visible; }
+
+/* TYPEWRITER & HIGHLIGHTER */
+.hero-tagline-wrapper { min-height: 48px !important; display: flex !important; align-items: center !important; justify-content: center !important; margin: -6px 0 0 !important; }
+.typewriter-headline {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif !important;
+  font-size: clamp(1.6rem, 4vw, 2.8rem) !important;
+  font-weight: 900 !important;
+  color: #1c1c1e !important;
+  letter-spacing: -0.04em !important;
+  text-transform: uppercase !important;
+  margin: 0 !important;
+  line-height: 1 !important;
+  cursor: default !important;
+  display: inline-block !important;
+  transform-origin: center center !important;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.typewriter-headline:hover { transform: scale(1.04) rotate(-0.5deg) !important; }
+.cursor-bar { font-weight: 300 !important; animation: blinkCursor 0.8s infinite !important; margin-left: 2px !important; }
+@keyframes blinkCursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+.highlight-yellow {
+  position: relative !important; display: inline-block !important; color: #1c1c1e !important; z-index: 1 !important; padding: 0 4px !important;
+}
+.highlight-yellow::before {
+  content: '' !important; position: absolute !important; top: 8% !important; left: -2px !important; right: -2px !important; bottom: 4% !important;
+  background-color: #ffe600 !important; z-index: -1 !important; border-radius: 4px 8px 5px 7px !important;
+  transform: rotate(-1deg) skew(-2deg) scaleX(0) !important; transform-origin: left center !important; transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+.typewriter-headline:hover .highlight-yellow::before { transform: rotate(-1deg) skew(-2deg) scaleX(1) !important; }
+
+/* FREE-FLOATING SOCIAL ICONS CONTAINER */
+.hero-social-pills {
+  display: flex !important;
+  align-items: center !important;
+  gap: 20px !important;
+  opacity: 0;
+  transform: scale(0.5) translateY(15px);
+  pointer-events: none;
+  transition: opacity 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+/* POP IN ANIMATION WHEN EYE IS CLICKED */
+.hero-social-pills.is-visible {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+  pointer-events: auto !important;
+}
+
+/* RAW FREE-FLOATING ICON BUTTONS */
+.hero-social-btn {
+  position: relative !important;
+  width: 42px !important;
+  height: 42px !important;
+  background: transparent !important;
+  border: none !important;
+  color: #1c1c1e !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  transition: transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275), color 0.2s !important;
+}
+
+.hero-social-btn:hover {
+  transform: translateY(-3px) scale(1.15) !important;
+  color: #000000 !important;
+}
+
+/* PENCIL CIRCLE OVERLAY FOR ICON BUTTONS */
+.pencil-circle-icon-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140%;
+  height: 140%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  overflow: visible;
+}
+
+.pencil-circle-icon-svg path {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  transition: stroke-dashoffset 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* DRAW PENCIL CIRCLE ON BUTTON HOVER */
+.hero-social-btn:hover .pencil-circle-icon-svg path {
+  stroke-dashoffset: 0;
+}
+
+/* EYE ANIMATIONS & INTRO */
+.intro-slide-item { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+body.intro-complete .intro-slide-item { opacity: 1 !important; transform: translateY(0) !important; }
+.draw-path { stroke-dashoffset: 0; }
+#heroPupil, .eye-open-lids, .eye-closed-lid { transition: opacity 0.12s ease; }
+.eye-open-lids { opacity: 1; } .eye-closed-lid { opacity: 0; }
+.eye-lashes-group { transform-origin: 150px 110px; opacity: 0; transform: scale(0.4); transition: transform 0.45s cubic-bezier(0.175,0.885,0.32,1.4), opacity 0.3s ease; }
+.eye-lashes-group.is-popped { opacity: 1; transform: scale(1); }
+.is-blinking #heroPupil, .is-blinking .eye-open-lids, .interactive-eye-container.can-hover:hover #heroPupil, .interactive-eye-container.can-hover:hover .eye-open-lids { opacity: 0 !important; }
+.is-blinking .eye-closed-lid, .interactive-eye-container.can-hover:hover .eye-closed-lid { opacity: 1 !important; }
+.is-blinking .eye-lashes-group, .interactive-eye-container.can-hover:hover .eye-lashes-group { opacity: 0 !important; transform: scale(0.3) translateY(15px) !important; }
+
+@media (max-width: 600px) {
+  .hero-brand-sticker { top: 16px !important; left: 16px !important; }
+  .top-row { font-size: 0.62rem !important; padding: 1px 4px !important; }
+  .bottom-row { font-size: 0.98rem !important; padding: 2px 5px !important; }
+  .doodle-click-prompt { left: 10px; top: -22px; font-size: 1.5rem; }
+}
