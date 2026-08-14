@@ -1,0 +1,17 @@
+/* okv1sual — main stylesheet */
+
+:root {
+  --color-bg: #f7f5f0;
+  --color-text: #1c1c1e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Space Grotesk", "JetBrains Mono", monospace, sans-serif;
+}
