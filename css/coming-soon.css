@@ -1,0 +1,19 @@
+/* Isolated coming-soon page only. Safe to delete with coming-soon/ and js/coming-soon.js. */
+
+html {
+  overflow: hidden !important;
+  height: 100% !important;
+}
+
+html,
+body,
+body.intro-complete {
+  overflow: hidden !important;
+  height: 100vh !important;
+  overscroll-behavior: none;
+}
+
+.custom-hero-section {
+  min-height: 100vh !important;
+  height: 100vh !important;
+}

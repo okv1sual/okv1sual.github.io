@@ -9,6 +9,8 @@
     const doodlePrompt = document.getElementById('doodlePrompt');
     const heroSocialGroup = document.getElementById('heroSocialGroup');
     const heroSkyBg = document.getElementById('heroSkyBg');
+    // Optional per-page overrides (coming-soon/). Unset on the main site.
+    const heroConfig = window.okv1sualHeroConfig || {};
 
     if (eyeBox && pupil) {
       function setupPath(path) {
@@ -129,7 +131,7 @@
           document.documentElement.style.overflow = '';
           document.body.classList.add('intro-complete');
           startTypewriter();
-          if (heroSocialGroup) heroSocialGroup.classList.add('is-visible');
+          if (heroSocialGroup && !heroConfig.deferSocials) heroSocialGroup.classList.add('is-visible');
 
           setTimeout(() => eyeBox.classList.remove('is-popping'), 700);
         }, 280);
@@ -140,7 +142,15 @@
         triggerBlink();
       });
 
+      function revealSocialsIfDeferred() {
+        if (heroConfig.deferSocials && heroSocialGroup) heroSocialGroup.classList.add('is-visible');
+      }
+
       function startTypewriter() {
+        if (typeof heroConfig.startTypewriter === 'function') {
+          heroConfig.startTypewriter(typewriterEl, revealSocialsIfDeferred);
+          return;
+        }
         if (!typewriterEl) return;
         const textPrefix = "made to be ";
         const highlightWord = "seen";
@@ -162,6 +172,7 @@
             setTimeout(typeChar, 85);
           } else {
             typewriterEl.innerHTML = 'made to be <span class="highlight-yellow">seen</span>';
+            revealSocialsIfDeferred();
           }
         }
         typeChar();
