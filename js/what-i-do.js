@@ -1,5 +1,6 @@
 // okv1sual — "what i do" section: scroll-triggered doodle reveal for the
-// heading, subtext, and hand-drawn icon cards.
+// hand-drawn icon cards. Cards hide again only once you're back at the
+// top of the page, so the draw-in can replay on the next pass.
 (function () {
   if (window.__widInitialized) {
     return;
@@ -10,22 +11,39 @@
     const revealEls = document.querySelectorAll('#what-i-do .scroll-reveal');
     if (!revealEls.length) return;
 
-    if (!('IntersectionObserver' in window)) {
-      // No IO support: just show everything immediately.
-      revealEls.forEach(el => el.classList.add('is-visible'));
-      return;
+    function isAtPageTop() {
+      return (window.scrollY || document.documentElement.scrollTop) <= 40;
     }
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.25, rootMargin: '0px 0px -40px 0px' });
+    function cardInView(el) {
+      const rect = el.getBoundingClientRect();
+      return rect.top < window.innerHeight * 0.82 && rect.bottom > 0;
+    }
 
-    revealEls.forEach(el => observer.observe(el));
+    function updateCards() {
+      if (isAtPageTop()) {
+        revealEls.forEach(el => el.classList.remove('is-visible'));
+        return;
+      }
+
+      revealEls.forEach(el => {
+        if (cardInView(el)) el.classList.add('is-visible');
+      });
+    }
+
+    let scrollTicking = false;
+    function onScroll() {
+      if (scrollTicking) return;
+      scrollTicking = true;
+      window.requestAnimationFrame(() => {
+        updateCards();
+        scrollTicking = false;
+      });
+    }
+
+    updateCards();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
   }
 
   if (document.readyState === 'loading') {

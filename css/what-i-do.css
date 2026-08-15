@@ -14,67 +14,16 @@
   margin: 0 auto;
 }
 
-/* --- HEADING --- */
-.wid-heading-row {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
-}
-
-.wid-tag-sticker {
-  display: inline-flex;
-  background-color: #1c1c1e;
-  color: #ffffff;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  padding: 4px 9px 3px;
-  border-radius: 4px 7px 5px 8px;
-  transform: rotate(-3deg);
-}
-
-.wid-heading {
-  position: relative;
-  display: inline-block;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(2.2rem, 6vw, 3.6rem);
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
-  line-height: 1;
-  margin: 0;
-}
-
-.wid-scribble-underline {
+.wid-sr-only {
   position: absolute;
-  left: 2px;
-  bottom: -14px;
-  width: 68%;
-  max-width: 180px;
-  height: 16px;
-  overflow: visible;
-}
-
-.wid-scribble-underline path {
-  stroke-dasharray: 210;
-  stroke-dashoffset: 210;
-  transition: stroke-dashoffset 0.9s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.scroll-reveal.is-visible .wid-scribble-underline path {
-  stroke-dashoffset: 0;
-}
-
-.wid-subtext {
-  font-family: 'Caveat', cursive;
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #1c1c1e;
-  margin: 26px 0 52px;
-  transform: rotate(-1deg);
-  transform-origin: left center;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* --- GRID --- */
@@ -103,11 +52,10 @@
 
 /* Staggered reveal so the cards doodle in one after another rather than
    all snapping in at once. */
-.wid-subtext.scroll-reveal { transition-delay: 0.08s; }
-.wid-card--1.scroll-reveal { transition-delay: 0.16s; }
-.wid-card--2.scroll-reveal { transition-delay: 0.24s; }
-.wid-card--3.scroll-reveal { transition-delay: 0.32s; }
-.wid-card--4.scroll-reveal { transition-delay: 0.4s; }
+.wid-card--1.scroll-reveal { transition-delay: 0.08s; }
+.wid-card--2.scroll-reveal { transition-delay: 0.16s; }
+.wid-card--3.scroll-reveal { transition-delay: 0.24s; }
+.wid-card--4.scroll-reveal { transition-delay: 0.32s; }
 
 .wid-card:hover {
   transform: rotate(0deg) translateY(-6px) !important;
@@ -192,5 +140,4 @@
 @media (max-width: 720px) {
   .what-i-do-section { padding: 80px 20px 90px; }
   .wid-grid { grid-template-columns: 1fr; gap: 26px; }
-  .wid-subtext { font-size: 1.4rem; margin-bottom: 40px; }
 }

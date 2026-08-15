@@ -1,7 +1,9 @@
 /* okv1sual — hero section (hand-drawn eye, typewriter, socials) */
 
 .custom-hero-section {
-  position: relative !important; width: 100% !important; min-height: 85vh !important;
+  position: relative !important; width: 100% !important;
+  min-height: 100vh !important; height: 100vh !important;
+  min-height: 100dvh !important; height: 100dvh !important;
   background-color: #f7f5f0 !important; display: flex !important; flex-direction: column !important;
   justify-content: center !important; align-items: center !important; padding: 100px 24px 60px !important;
   box-sizing: border-box !important;
