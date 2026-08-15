@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/nav.css" />
   <link rel="stylesheet" href="css/hero.css" />
-  <link rel="stylesheet" href="css/what-i-do.css" />
+  <link rel="stylesheet" href="css/cards.css" />
 </head>
 <body>
 
@@ -42,10 +42,12 @@
       <div class="menu-inner-content">
         <ul class="menu-links">
           <li><a href="#hero" class="stagger-link">HOME</a></li>
-          <li><a href="#what-i-do" class="stagger-link">ABOUT</a></li>
-          <li><a href="#sponsors" class="stagger-link">PARTNERS</a></li>
-          <li><a href="#support" class="stagger-link">SUPPORT</a></li>
+          <li><a href="#about" class="stagger-link">ABOUT</a></li>
+          <li><a href="#sponsors" class="stagger-link">SPONSORS</a></li>
+          <li><a href="#lets-chat" class="stagger-link">LETS CHAT</a></li>
           <li><a href="#downloads" class="stagger-link">DOWNLOADS</a></li>
+          <li><a href="#support" class="stagger-link">SUPPORT</a></li>
+          <li><a href="#merch" class="stagger-link">MERCH</a></li>
         </ul>
         <div class="menu-footer">
           <span class="live-clock" id="liveClock">00:00 AM</span>
@@ -64,6 +66,7 @@
            site "pops" open (see body.intro-complete in css/hero.css).
            Given a slight scroll-parallax drift by js/animations.js. -->
       <div class="hero-sky-bg" id="heroSkyBg" aria-hidden="true"></div>
+
 
       <!-- VIS/2026 BADGE — black ink on transparent background, top-left of
            the hero, fades in with the rest of the page on unlock. -->
@@ -154,7 +157,7 @@
       <!-- SCROLL-TO-ABOUT — sits at the bottom of the full-viewport hero.
            Hidden until the site unlocks. Bounce + arrow spin are CSS-only
            (see css/hero.css); the href handles the smooth slide. -->
-      <a href="#what-i-do" class="hero-scroll-btn" id="heroScrollBtn" aria-label="Scroll to about">
+      <a href="#cards" class="hero-scroll-btn" id="heroScrollBtn" aria-label="Scroll to cards">
         <svg class="hero-scroll-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 5v13" />
           <path d="M6 13l6 6 6-6" />
@@ -163,82 +166,95 @@
 
     </section>
 
-    <section class="what-i-do-section" id="what-i-do" aria-label="What I do">
-      <div class="wid-container">
-        <h2 class="wid-sr-only">What I do</h2>
+    <section class="cards-section" id="cards" aria-label="Site cards">
+      <div class="cards-grid" id="cardsGrid">
 
-        <div class="wid-grid">
-
-          <article class="wid-card wid-card--1 scroll-reveal">
-            <span class="wid-card-number">01</span>
-            <div class="wid-card-icon">
-              <svg viewBox="0 0 60 60" fill="none" stroke="#1c1c1e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="wid-icon-svg">
-                <path class="wid-draw-path" d="M10,50 L34,26" />
-                <path class="wid-draw-path" d="M32,22 C 38,15 49,17 47,25 C 45,33 34,35 28,28 C 26,26 28,24 32,22 Z" />
-                <path class="wid-draw-path" d="M12,52 C 10,54 10,57 13,57 C 16,57 15,53 12,52 Z" />
-              </svg>
+        <article class="site-card scroll-reveal" id="about" data-card="about">
+          <div class="site-card-preview">
+            <h3 class="site-card-title">About</h3>
+            <p class="site-card-desc">Hi. My names visual, I stream goofy games to twitch and kick!</p>
+          </div>
+          <div class="site-card-detail">
+            <button type="button" class="site-card-close" aria-label="Close card"><span aria-hidden="true">×</span></button>
+            <div class="site-card-detail-inner">
+              <h3>About</h3>
+              <p>Hi. My names visual, I stream goofy games to twitch and kick!</p>
             </div>
-            <h3 class="wid-card-title">Live Digital Art</h3>
-            <p class="wid-card-desc">Painting, sketching, and character work live on stream — chat picks the prompts, I just try to keep up.</p>
-          </article>
+          </div>
+        </article>
 
-          <article class="wid-card wid-card--2 scroll-reveal">
-            <span class="wid-card-number">02</span>
-            <div class="wid-card-icon">
-              <svg viewBox="0 0 60 60" fill="none" stroke="#1c1c1e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="wid-icon-svg">
-                <path class="wid-draw-path" d="M8,22 L52,22 L47,9 L13,10 Z" />
-                <path class="wid-draw-path" d="M17,10 L21,22" />
-                <path class="wid-draw-path" d="M28,9 L32,22" />
-                <path class="wid-draw-path" d="M39,10 L43,22" />
-                <path class="wid-draw-path" d="M9,24 L51,24 L51,49 C51,50.6 49.6,52 48,52 L12,52 C10.4,52 9,50.6 9,49 Z" />
-                <path class="wid-draw-path" d="M23,33 L39,40 L23,47 Z" />
-              </svg>
+        <article class="site-card scroll-reveal" id="sponsors" data-card="sponsors">
+          <div class="site-card-preview">
+            <h3 class="site-card-title">Sponsors</h3>
+            <p class="site-card-desc">These are the badass companies that I currently work with!</p>
+          </div>
+          <div class="site-card-detail">
+            <button type="button" class="site-card-close" aria-label="Close card"><span aria-hidden="true">×</span></button>
+            <div class="site-card-detail-inner">
+              <h3>Sponsors</h3>
+              <p>These are the badass companies that I currently work with!</p>
             </div>
-            <h3 class="wid-card-title">Stream Editing &amp; VFX</h3>
-            <p class="wid-card-desc">Cutting highlights, syncing motion graphics, and turning raw VODs into something worth rewatching.</p>
-          </article>
+          </div>
+        </article>
 
-          <article class="wid-card wid-card--3 scroll-reveal">
-            <span class="wid-card-number">03</span>
-            <div class="wid-card-icon">
-              <svg viewBox="0 0 60 60" fill="none" stroke="#1c1c1e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="wid-icon-svg">
-                <path class="wid-draw-path" d="M19,7 C15,7 12,9.5 12,13 L12,45 C12,48.5 15,51 19,51 L23,51 L22,58 L34,51 L41,51 C45,51 48,48.5 48,45 L48,13 C48,9.5 45,7 41,7 Z" />
-                <path class="wid-draw-path" d="M25,23 L25,35 L35,29 Z" />
-              </svg>
+        <article class="site-card scroll-reveal" id="lets-chat" data-card="lets-chat">
+          <div class="site-card-preview">
+            <h3 class="site-card-title">Lets chat</h3>
+            <p class="site-card-desc">If youd like to work with me reach me here!</p>
+          </div>
+          <div class="site-card-detail">
+            <button type="button" class="site-card-close" aria-label="Close card"><span aria-hidden="true">×</span></button>
+            <div class="site-card-detail-inner">
+              <h3>Lets chat</h3>
+              <p>If youd like to work with me reach me here!</p>
             </div>
-            <h3 class="wid-card-title">Short-Form Clips</h3>
-            <p class="wid-card-desc">Bite-sized moments chopped up for TikTok, Shorts, and wherever else the algorithm feels like sending them.</p>
-          </article>
+          </div>
+        </article>
 
-          <article class="wid-card wid-card--4 scroll-reveal">
-            <span class="wid-card-number">04</span>
-            <div class="wid-card-icon">
-              <svg viewBox="0 0 60 60" fill="none" stroke="#1c1c1e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="wid-icon-svg">
-                <path class="wid-draw-path" d="M12,15 C12,11 15,9 19,9 L44,9 C48,9 51,12 51,16 L52,33 C52,37 49,40 45,40 L27,40 L16,49 L18,40 L18,40 C14,40 11,37 11,33 Z" />
-                <circle class="wid-draw-path" cx="22" cy="24" r="1.6" fill="#1c1c1e" stroke="none" />
-                <circle class="wid-draw-path" cx="31" cy="24" r="1.6" fill="#1c1c1e" stroke="none" />
-                <circle class="wid-draw-path" cx="40" cy="24" r="1.6" fill="#1c1c1e" stroke="none" />
-              </svg>
+        <article class="site-card scroll-reveal" id="downloads" data-card="downloads">
+          <div class="site-card-preview">
+            <h3 class="site-card-title">Downloads</h3>
+            <p class="site-card-desc">Are you a content creator? Heres some free stuff for you!</p>
+          </div>
+          <div class="site-card-detail">
+            <button type="button" class="site-card-close" aria-label="Close card"><span aria-hidden="true">×</span></button>
+            <div class="site-card-detail-inner">
+              <h3>Downloads</h3>
+              <p>Are you a content creator? Heres some free stuff for you!</p>
+              <div id="downloads-grid"></div>
             </div>
-            <h3 class="wid-card-title">Community &amp; Chat</h3>
-            <p class="wid-card-desc">Running a Discord that's somehow busier than the stream itself, and hanging out just to hang out.</p>
-          </article>
+          </div>
+        </article>
 
-        </div>
+        <article class="site-card scroll-reveal" id="support" data-card="support">
+          <div class="site-card-preview">
+            <h3 class="site-card-title">Support</h3>
+            <p class="site-card-desc">If you would like to support what I do, you can do that here!</p>
+          </div>
+          <div class="site-card-detail">
+            <button type="button" class="site-card-close" aria-label="Close card"><span aria-hidden="true">×</span></button>
+            <div class="site-card-detail-inner">
+              <h3>Support</h3>
+              <p>If you would like to support what I do, you can do that here!</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="site-card scroll-reveal" id="merch" data-card="merch">
+          <div class="site-card-preview">
+            <h3 class="site-card-title">Merch</h3>
+            <p class="site-card-desc">Coming soon!</p>
+          </div>
+          <div class="site-card-detail">
+            <button type="button" class="site-card-close" aria-label="Close card"><span aria-hidden="true">×</span></button>
+            <div class="site-card-detail-inner">
+              <h3>Merch</h3>
+              <p>Coming soon!</p>
+            </div>
+          </div>
+        </article>
+
       </div>
-    </section>
-
-    <section id="sponsors">
-      <h2>Sponsors</h2>
-    </section>
-
-    <section id="support">
-      <h2>Support</h2>
-    </section>
-
-    <section id="downloads">
-      <h2>Downloads</h2>
-      <div id="downloads-grid"></div>
     </section>
   </main>
 
@@ -249,6 +265,6 @@
   <script src="js/main.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/nav.js"></script>
-  <script src="js/what-i-do.js"></script>
+  <script src="js/cards.js"></script>
 </body>
 </html>
