@@ -9,6 +9,7 @@
     const doodlePrompt = document.getElementById('doodlePrompt');
     const heroSocialGroup = document.getElementById('heroSocialGroup');
     const heroSkyBg = document.getElementById('heroSkyBg');
+    const heroScrollBtn = document.getElementById('heroScrollBtn');
     // Optional per-page overrides (coming-soon/). Unset on the main site.
     const heroConfig = window.okv1sualHeroConfig || {};
 
@@ -178,25 +179,35 @@
         typeChar();
       }
 
-      // SKY BACKGROUND PARALLAX — a subtle drift as the page scrolls, so
-      // the clouds feel like they're sitting slightly behind the content
-      // rather than pasted flat onto it. Throttled via requestAnimationFrame
-      // and capped so it never outpaces the buffer built into .hero-sky-bg
-      // (see css/hero.css) and reveals a gap at the top/bottom edge.
-      if (heroSkyBg) {
-        let parallaxTicking = false;
-        function updateParallax() {
-          const offset = Math.min(window.scrollY * 0.15, 80);
+      // SKY BACKGROUND PARALLAX + SCROLL-BUTTON VISIBILITY — throttled via
+      // requestAnimationFrame. Parallax is capped so it never outpaces the
+      // buffer built into .hero-sky-bg. The yellow down-arrow fades out as
+      // soon as the page leaves the top (or the button is clicked) and
+      // fades back in only when the user returns to the top.
+      let scrollUiTicking = false;
+      function updateScrollUi() {
+        const scrollY = window.scrollY || document.documentElement.scrollTop;
+        if (heroSkyBg) {
+          const offset = Math.min(scrollY * 0.15, 80);
           heroSkyBg.style.transform = `translate3d(0, ${offset}px, 0)`;
-          parallaxTicking = false;
         }
-        window.addEventListener('scroll', () => {
-          if (!parallaxTicking) {
-            window.requestAnimationFrame(updateParallax);
-            parallaxTicking = true;
-          }
-        }, { passive: true });
-        updateParallax();
+        if (heroScrollBtn) {
+          heroScrollBtn.classList.toggle('is-away', scrollY > 40);
+        }
+        scrollUiTicking = false;
+      }
+      window.addEventListener('scroll', () => {
+        if (!scrollUiTicking) {
+          window.requestAnimationFrame(updateScrollUi);
+          scrollUiTicking = true;
+        }
+      }, { passive: true });
+      updateScrollUi();
+
+      if (heroScrollBtn) {
+        heroScrollBtn.addEventListener('click', () => {
+          heroScrollBtn.classList.add('is-away');
+        });
       }
     }
   }
