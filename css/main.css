@@ -45,3 +45,39 @@ body {
   transform-origin: left center;
   transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
 }
+
+.page-section {
+  width: 100%;
+  min-height: 70vh;
+  padding: 100px 24px 110px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+}
+
+.page-section:nth-of-type(even) {
+  background-color: #f7f5f0;
+}
+
+.page-section-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.page-section h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0 0 18px;
+}
+
+.page-section p {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(28, 28, 30, 0.72);
+  margin: 0;
+  max-width: 40em;
+}

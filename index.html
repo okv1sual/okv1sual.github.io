@@ -13,7 +13,6 @@
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="css/nav.css" />
   <link rel="stylesheet" href="css/hero.css" />
-  <link rel="stylesheet" href="css/cards.css" />
 </head>
 <body>
 
@@ -44,7 +43,6 @@
           <li><a href="#hero" class="stagger-link">HOME</a></li>
           <li><a href="#about" class="stagger-link">ABOUT</a></li>
           <li><a href="#sponsors" class="stagger-link">SPONSORS</a></li>
-          <li><a href="#lets-chat" class="stagger-link">LETS CHAT</a></li>
           <li><a href="#downloads" class="stagger-link">DOWNLOADS</a></li>
           <li><a href="#support" class="stagger-link">SUPPORT</a></li>
           <li><a href="#merch" class="stagger-link">MERCH</a></li>
@@ -157,7 +155,7 @@
       <!-- SCROLL-TO-ABOUT — sits at the bottom of the full-viewport hero.
            Hidden until the site unlocks. Bounce + arrow spin are CSS-only
            (see css/hero.css); the href handles the smooth slide. -->
-      <a href="#cards" class="hero-scroll-btn" id="heroScrollBtn" aria-label="Scroll to cards">
+      <a href="#about" class="hero-scroll-btn" id="heroScrollBtn" aria-label="Scroll to about">
         <svg class="hero-scroll-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 5v13" />
           <path d="M6 13l6 6 6-6" />
@@ -166,94 +164,39 @@
 
     </section>
 
-    <section class="cards-section" id="cards" aria-label="Site cards">
-      <div class="cards-grid" id="cardsGrid">
+    <section class="page-section" id="about">
+      <div class="page-section-inner">
+        <h2>About</h2>
+        <p>Hi. My names visual, I stream goofy games to twitch and kick!</p>
+      </div>
+    </section>
 
-        <article class="site-card scroll-reveal" id="about" data-card="about">
-          <div class="site-card-preview">
-            <h3 class="site-card-title">About</h3>
-            <p class="site-card-desc">Hi. My names visual, I stream goofy games to twitch and kick!</p>
-          </div>
-          <div class="site-card-detail">
-            <button type="button" class="site-card-close" aria-label="Close card"><span aria-hidden="true">×</span></button>
-            <div class="site-card-detail-inner">
-              <h3>About</h3>
-              <p>Hi. My names visual, I stream goofy games to twitch and kick!</p>
-            </div>
-          </div>
-        </article>
+    <section class="page-section" id="sponsors">
+      <div class="page-section-inner">
+        <h2>Sponsors</h2>
+        <p>These are the badass companies that I currently work with!</p>
+      </div>
+    </section>
 
-        <article class="site-card scroll-reveal" id="sponsors" data-card="sponsors">
-          <div class="site-card-preview">
-            <h3 class="site-card-title">Sponsors</h3>
-            <p class="site-card-desc">These are the badass companies that I currently work with!</p>
-          </div>
-          <div class="site-card-detail">
-            <button type="button" class="site-card-close" aria-label="Close card"><span aria-hidden="true">×</span></button>
-            <div class="site-card-detail-inner">
-              <h3>Sponsors</h3>
-              <p>These are the badass companies that I currently work with!</p>
-            </div>
-          </div>
-        </article>
+    <section class="page-section" id="downloads">
+      <div class="page-section-inner">
+        <h2>Downloads</h2>
+        <p>Are you a content creator? Heres some free stuff for you!</p>
+        <div id="downloads-grid"></div>
+      </div>
+    </section>
 
-        <article class="site-card scroll-reveal" id="lets-chat" data-card="lets-chat">
-          <div class="site-card-preview">
-            <h3 class="site-card-title">Lets chat</h3>
-            <p class="site-card-desc">If youd like to work with me reach me here!</p>
-          </div>
-          <div class="site-card-detail">
-            <button type="button" class="site-card-close" aria-label="Close card"><span aria-hidden="true">×</span></button>
-            <div class="site-card-detail-inner">
-              <h3>Lets chat</h3>
-              <p>If youd like to work with me reach me here!</p>
-            </div>
-          </div>
-        </article>
+    <section class="page-section" id="support">
+      <div class="page-section-inner">
+        <h2>Support</h2>
+        <p>If you would like to support what I do, you can do that here!</p>
+      </div>
+    </section>
 
-        <article class="site-card scroll-reveal" id="downloads" data-card="downloads">
-          <div class="site-card-preview">
-            <h3 class="site-card-title">Downloads</h3>
-            <p class="site-card-desc">Are you a content creator? Heres some free stuff for you!</p>
-          </div>
-          <div class="site-card-detail">
-            <button type="button" class="site-card-close" aria-label="Close card"><span aria-hidden="true">×</span></button>
-            <div class="site-card-detail-inner">
-              <h3>Downloads</h3>
-              <p>Are you a content creator? Heres some free stuff for you!</p>
-              <div id="downloads-grid"></div>
-            </div>
-          </div>
-        </article>
-
-        <article class="site-card scroll-reveal" id="support" data-card="support">
-          <div class="site-card-preview">
-            <h3 class="site-card-title">Support</h3>
-            <p class="site-card-desc">If you would like to support what I do, you can do that here!</p>
-          </div>
-          <div class="site-card-detail">
-            <button type="button" class="site-card-close" aria-label="Close card"><span aria-hidden="true">×</span></button>
-            <div class="site-card-detail-inner">
-              <h3>Support</h3>
-              <p>If you would like to support what I do, you can do that here!</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="site-card scroll-reveal" id="merch" data-card="merch">
-          <div class="site-card-preview">
-            <h3 class="site-card-title">Merch</h3>
-            <p class="site-card-desc">Coming soon!</p>
-          </div>
-          <div class="site-card-detail">
-            <button type="button" class="site-card-close" aria-label="Close card"><span aria-hidden="true">×</span></button>
-            <div class="site-card-detail-inner">
-              <h3>Merch</h3>
-              <p>Coming soon!</p>
-            </div>
-          </div>
-        </article>
-
+    <section class="page-section" id="merch">
+      <div class="page-section-inner">
+        <h2>Merch</h2>
+        <p>Coming soon!</p>
       </div>
     </section>
   </main>
@@ -265,6 +208,5 @@
   <script src="js/main.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/nav.js"></script>
-  <script src="js/cards.js"></script>
 </body>
 </html>

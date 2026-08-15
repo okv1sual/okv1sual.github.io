@@ -38,11 +38,6 @@ body.intro-complete .boxer-nav-wrapper {
   pointer-events: auto !important;
 }
 
-body.intro-complete.card-open .boxer-nav-wrapper {
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
 /* Inner Layout */
 .boxer-top-bar {
   display: flex !important;
